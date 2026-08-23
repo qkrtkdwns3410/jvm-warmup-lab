@@ -1,0 +1,5 @@
+lab:
+  warmup-enabled: false
+  cold:
+    simulator-enabled: true
+    hold-duration: 1500ms

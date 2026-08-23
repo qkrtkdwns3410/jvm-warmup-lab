@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: jvm-warmup-lab
+  datasource:
+    url: ${JDBC_URL:jdbc:mysql://localhost:3306/warmup_lab?useSSL=false&allowPublicKeyRetrieval=true}
+    username: ${JDBC_USERNAME:lab}
+    password: ${JDBC_PASSWORD:lab}
+    hikari:
+      maximum-pool-size: ${HIKARI_MAX_POOL_SIZE:10}
+      minimum-idle: 0
+      connection-timeout: ${HIKARI_CONNECTION_TIMEOUT:700}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+management:
+  endpoints.web.exposure.include: health,info,metrics
+  endpoint.health:
+    probes.enabled: true
+    show-details: always
+    group:
+      startup.include: warmup
+      readiness.include: readinessState,warmup
+lab:
+  warmup-enabled: false
+  cold:
+    simulator-enabled: false
+    hold-duration: 1500ms
